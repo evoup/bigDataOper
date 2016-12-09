@@ -1,3 +1,4 @@
+package org.beihang.bigData;
 import java.util.Arrays;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.function.FlatMapFunction;
