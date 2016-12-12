@@ -35,15 +35,16 @@ public class CharImageProcessImpl implements CharImageProcess {
         //BufferedImage img = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
         //g2d.setFont(font);
         AffineTransform stretch = new AffineTransform();
-        int w = 40; // image width
-        int h = 25; // image height
+        int w = 20; // image width
+        int h = 20; // image height
         int f = 20; // Font size in px
         //String s = "The quick brown fox jumps over the lazy dog.";
         String s = "8";
         final BufferedImage bi = new BufferedImage(
                 w,h,BufferedImage.TYPE_INT_RGB);
         Graphics2D g = bi.createGraphics();
-        g.setFont(new Font("Serif",Font.PLAIN,f));
+        //g.setFont(new Font("Serif",Font.PLAIN,f));
+        g.setFont(font);
         g.setRenderingHint(
                 RenderingHints.KEY_TEXT_ANTIALIASING,
                 RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
@@ -53,7 +54,7 @@ public class CharImageProcessImpl implements CharImageProcess {
         g.fillRect(0, 0, w, h);
         g.setColor(Color.BLACK);
 
-        for (int i=0; (i*f)+f<=h; i++) {
+/*        for (int i=0; (i*f)+f<=h; i++) {
             g.drawString(s, 0, (i*f)+f);
             // stretch
             stretch.concatenate(
@@ -67,7 +68,7 @@ public class CharImageProcessImpl implements CharImageProcess {
                     c.getGreen(),
                     c.getBlue(),
                     (int)(c.getAlpha()*.75)));
-        }
+        }*/
 
         g.dispose();
 
