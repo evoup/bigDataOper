@@ -25,7 +25,7 @@ public class WordCount02 {
         System.out.println("创建javaStreamingContext成功："+jssc);
         Fonts fonts = new Fonts();
         LOG.info("[new Fonts]");
-        fonts.getFont("hdfs://namenode:8020/project/2");
+        fonts.getFont("hdfs://namenode:8020/project/1.ttf");
         System.out.println("read hdfs font ok");
 
         JavaReceiverInputDStream<String> lines=jssc.socketTextStream("datanode01", 9999);

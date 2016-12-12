@@ -16,7 +16,7 @@ public class CharImageProcessTest extends TestCase {
 
     public void testGetFont() {
         Fonts fonts = new Fonts();
-        fonts.getFont("hdfs://namenode:8020/project/2");
+        fonts.getFont("/project/1.ttf");
         assertTrue(true);
     }
 
