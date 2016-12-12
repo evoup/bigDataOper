@@ -32,6 +32,7 @@ public class CharImageProcessImpl implements CharImageProcess {
         Fonts fonts = new Fonts();
         LOG.info("[new Fonts]");
         Font font = fonts.getFont(receiptImageFilePath);
+        font.deriveFont(Font.PLAIN, 20f);
         //BufferedImage img = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
         //g2d.setFont(font);
         AffineTransform stretch = new AffineTransform();
