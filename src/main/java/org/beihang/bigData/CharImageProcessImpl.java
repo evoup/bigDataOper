@@ -32,7 +32,7 @@ public class CharImageProcessImpl implements CharImageProcess {
         Fonts fonts = new Fonts();
         LOG.info("[new Fonts]");
         Font font = fonts.getFont(receiptImageFilePath);
-        font.deriveFont(Font.PLAIN, 20f);
+        font.deriveFont(Font.PLAIN, 20);
         //BufferedImage img = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
         //g2d.setFont(font);
         AffineTransform stretch = new AffineTransform();
@@ -40,7 +40,7 @@ public class CharImageProcessImpl implements CharImageProcess {
         int h = 25; // image height
         int f = 20; // Font size in px
         //String s = "The quick brown fox jumps over the lazy dog.";
-        String s = "8";
+        String s = "a";
         final BufferedImage bi = new BufferedImage(
                 w,h,BufferedImage.TYPE_INT_RGB);
         Graphics2D g = bi.createGraphics();
