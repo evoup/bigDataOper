@@ -1,13 +1,16 @@
 package org.beihang.bigData;
 
+import com.twitter.chill.Base64;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
 
 /**
  * Created by evoup on 16-12-11.
@@ -52,7 +55,12 @@ public class CharImageProcessImpl implements CharImageProcess {
         g2d.dispose();
         try {
             LOG.info("[start write png]");
-            ImageIO.write(img, "png", new File("/sparkStream001/Text.png"));
+            //ImageIO.write(img, "png", new File("/sparkStream001/Text.png"));
+            ByteArrayOutputStream os = new ByteArrayOutputStream();
+            OutputStream b64 = new Base64.OutputStream(os);
+            ImageIO.write(img, "png", b64);
+            String result = os.toString("UTF-8");
+            LOG.info("[result:" + result + "]");
         } catch (IOException ex) {
             LOG.error(ex.getMessage(), ex);
         }
