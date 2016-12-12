@@ -35,11 +35,11 @@ public class CharImageProcessImpl implements CharImageProcess {
         //BufferedImage img = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
         //g2d.setFont(font);
         AffineTransform stretch = new AffineTransform();
-        int w = 80; // image width
+        int w = 40; // image width
         int h = 25; // image height
-        int f = 3; // Font size in px
-        String s = "The quick brown fox jumps over the lazy dog.";
-
+        int f = 20; // Font size in px
+        //String s = "The quick brown fox jumps over the lazy dog.";
+        String s = "8";
         final BufferedImage bi = new BufferedImage(
                 w,h,BufferedImage.TYPE_INT_RGB);
         Graphics2D g = bi.createGraphics();
