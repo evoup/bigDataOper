@@ -53,7 +53,7 @@ public class CharImageProcessImpl implements CharImageProcess {
         g.fillRect(0, 0, w, h);
         g.setColor(Color.BLACK);
 
-/*        for (int i=0; (i*f)+f<=h; i++) {
+        for (int i=0; (i*f)+f<=h; i++) {
             g.drawString(s, 0, (i*f)+f);
             // stretch
             stretch.concatenate(
@@ -67,7 +67,7 @@ public class CharImageProcessImpl implements CharImageProcess {
                     c.getGreen(),
                     c.getBlue(),
                     (int)(c.getAlpha()*.75)));
-        }*/
+        }
 
         g.dispose();
 
