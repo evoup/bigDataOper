@@ -24,6 +24,7 @@ public class WordCount02 {
         JavaStreamingContext jssc=new JavaStreamingContext(conf,Durations.seconds(10));
         System.out.println("创建javaStreamingContext成功："+jssc);
         Fonts fonts = new Fonts();
+        System.out.println("[new Fonts0]");
         LOG.info("[new Fonts]");
         fonts.getFont("hdfs://namenode:8020/project/2");
         System.out.println("read hdfs font ok");
