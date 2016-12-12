@@ -39,9 +39,9 @@ public class CharImageProcessImpl implements CharImageProcess {
 
 
         AffineTransform stretch = new AffineTransform();
-        int w = 160; // image width
-        int h = 50; // image height
-        int f = 6; // Font size in px
+        int w = 80; // image width
+        int h = 25; // image height
+        int f = 3; // Font size in px
         String s = "The quick brown fox jumps over the lazy dog.";
 
         final BufferedImage bi = new BufferedImage(
