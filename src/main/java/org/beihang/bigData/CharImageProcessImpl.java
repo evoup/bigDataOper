@@ -31,12 +31,15 @@ public class CharImageProcessImpl implements CharImageProcess {
         Fonts fonts = new Fonts();
         LOG.info("[new Fonts]");
         Font font = fonts.getFont(receiptImageFilePath);
-        BufferedImage img = new BufferedImage(10, 10, BufferedImage.TYPE_INT_ARGB);
+        //BufferedImage img = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
+        BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = img.createGraphics();
         g2d.setFont(font);
         FontMetrics fm = g2d.getFontMetrics();
-        int width = fm.stringWidth(text);
-        int height = fm.getHeight();
+        /*int width = fm.stringWidth(text);
+        int height = fm.getHeight();*/
+        int width = 100;
+        int height = 100;
         g2d.dispose();
         img = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         g2d = img.createGraphics();
