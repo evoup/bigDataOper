@@ -44,8 +44,8 @@ public class CharImageProcessImpl implements CharImageProcess {
         final BufferedImage bi = new BufferedImage(
                 w,h,BufferedImage.TYPE_INT_RGB);
         Graphics2D g = bi.createGraphics();
-        //g.setFont(new Font("Serif",Font.PLAIN,f));
-        g.setFont(font);
+        g.setFont(new Font("Serif",Font.PLAIN,f));
+        //g.setFont(font);
         g.setRenderingHint(
                 RenderingHints.KEY_TEXT_ANTIALIASING,
                 RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
