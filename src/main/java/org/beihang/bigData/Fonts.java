@@ -6,34 +6,24 @@ package org.beihang.bigData;
  */
 
 
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FileSystem;
+import org.apache.hadoop.fs.Path;
 import java.awt.Font;
-        import java.io.InputStream;
-        import java.util.Map;
-        import java.util.concurrent.ConcurrentHashMap;
+import java.io.InputStream;
+import java.net.URI;
 
 public class Fonts {
 
-    // Prepare a static "cache" mapping font names to Font objects.
-    private static String[] names = { "A.ttf" };
-
-    private static Map<String, Font> cache = new ConcurrentHashMap<>(names.length);
-    static {
-        for (String name : names) {
-            cache.put(name, getFont(name));
-        }
-    }
-
-    public static Font getFont(String name) {
-        Font font = null;
-        if (cache != null) {
-            if ((font = cache.get(name)) != null) {
-                return font;
-            }
-        }
-        String fName = "/fonts/" + name;
+    public Font getFont(String fName) {
+        Font font;
         try {
-            InputStream is = Fonts.class.getResourceAsStream(fName);
-            font = Font.createFont(Font.TRUETYPE_FONT, is);
+            Configuration configuration = new Configuration();
+            URI uri = new URI(fName);
+            FileSystem hdfs = FileSystem.get(uri, configuration);
+            Path path = new Path(uri);
+            InputStream inputStream = hdfs.open(path);
+            font = Font.createFont(Font.TRUETYPE_FONT, inputStream);
         } catch (Exception ex) {
             ex.printStackTrace();
             System.err.println(fName + " not loaded.  Using serif font.");
