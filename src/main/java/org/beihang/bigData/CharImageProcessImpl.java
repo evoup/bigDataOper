@@ -52,7 +52,7 @@ public class CharImageProcessImpl implements CharImageProcess {
         g2d.dispose();
         try {
             LOG.info("[start write png]");
-            ImageIO.write(img, "png", new File("Text.png"));
+            ImageIO.write(img, "png", new File("/sparkStream001/Text.png"));
         } catch (IOException ex) {
             LOG.error(ex.getMessage(), ex);
         }
