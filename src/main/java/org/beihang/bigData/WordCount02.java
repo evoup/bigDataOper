@@ -22,6 +22,7 @@ public class WordCount02 {
         SparkConf conf = new SparkConf().setMaster("local[4]").setAppName("wordCountSparkStream")
                 .set("spark.testing.memory", "2147480000");
         JavaStreamingContext jssc=new JavaStreamingContext(conf,Durations.seconds(10));
+        System.out.println("[test]");
         System.out.println("创建javaStreamingContext成功："+jssc);
         Fonts fonts = new Fonts();
         System.out.println("[new Fonts0]");
