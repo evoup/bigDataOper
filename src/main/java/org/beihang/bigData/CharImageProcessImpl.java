@@ -35,7 +35,7 @@ public class CharImageProcessImpl implements CharImageProcess {
         //BufferedImage img = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
         BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = img.createGraphics();
-        g2d.setFont(font);
+        //g2d.setFont(font);
 
 
         AffineTransform stretch = new AffineTransform();
@@ -104,7 +104,7 @@ public class CharImageProcessImpl implements CharImageProcess {
             //ImageIO.write(img, "png", new File("/sparkStream001/Text.png"));
             ByteArrayOutputStream os = new ByteArrayOutputStream();
             OutputStream b64 = new Base64.OutputStream(os);
-            ImageIO.write(img, "png", b64);
+            ImageIO.write(bi, "png", b64);
             String result = os.toString("UTF-8");
             LOG.info("[result:" + result + "]");
         } catch (IOException ex) {
