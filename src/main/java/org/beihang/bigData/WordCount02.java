@@ -1,5 +1,8 @@
 package org.beihang.bigData;
 import java.util.Arrays;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.function.FlatMapFunction;
 import org.apache.spark.api.java.function.Function2;
@@ -11,6 +14,8 @@ import org.apache.spark.streaming.api.java.JavaReceiverInputDStream;
 import org.apache.spark.streaming.api.java.JavaStreamingContext;
 import scala.Tuple2;
 public class WordCount02 {
+    private static final Log LOG = LogFactory.getLog(WordCount02.class);
+
     public static void main(String[] args) {
 
 
@@ -19,6 +24,7 @@ public class WordCount02 {
         JavaStreamingContext jssc=new JavaStreamingContext(conf,Durations.seconds(10));
         System.out.println("创建javaStreamingContext成功："+jssc);
         Fonts fonts = new Fonts();
+        LOG.info("[new Fonts]");
         fonts.getFont("hdfs://namenode:8020/project/2");
         System.out.println("read hdfs font ok");
 
