@@ -24,7 +24,7 @@ public class WordCount02 {
         JavaStreamingContext jssc=new JavaStreamingContext(conf,Durations.seconds(10));
         LOG.info("[创建javaStreamingContext成功：" + jssc + "]");
         CharImageProcess proc = new CharImageProcessImpl("43254545");
-        proc.getTextFromSpiderImage("/project/1.ttf");
+        proc.getTextFromSpiderImage("/project/duma.ttf");
         LOG.info("[read hdfs font ok]");
 
         JavaReceiverInputDStream<String> lines=jssc.socketTextStream("datanode01", 9999);
