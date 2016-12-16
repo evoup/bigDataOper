@@ -87,9 +87,13 @@
             <artifactId>hbase-common</artifactId>
             <version>1.2.0-cdh5.7.0</version>
         </dependency>
-
-
-
+        <!-- https://mvnrepository.com/artifact/org.apache.hbase/hbase-protocol -->
+        <dependency>
+            <groupId>org.apache.hbase</groupId>
+            <artifactId>hbase-protocol</artifactId>
+            <version>1.2.0-cdh5.7.0</version>
+        </dependency>
+        
     </dependencies>
 
     <build>
