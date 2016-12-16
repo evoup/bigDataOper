@@ -18,8 +18,10 @@ public class HbaseProcess {
         Configuration config = HBaseConfiguration.create();
         HTable table = new HTable(config, "ocr_table");
         Put p = new Put(Bytes.toBytes(fontName));
-        p.add(Bytes.toBytes("myLittleFamily"), Bytes.toBytes("someQualifier"),
-                Bytes.toBytes("Some Value"));
+        p.add(Bytes.toBytes("info"), Bytes.toBytes("type"),
+                Bytes.toBytes("png"));
+        table.put(p);
+
 
     }
 
