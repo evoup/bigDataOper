@@ -16,7 +16,7 @@ public class HbaseProcess {
     public void saveImg(String fontName) throws IOException {
         Configuration hBaseConfig =  HBaseConfiguration.create();
         hBaseConfig.setInt("timeout", 120000);
-        hBaseConfig.set("hbase.master", "*" + "zoo3" + ":9000*");
+        hBaseConfig.set("hbase.master", "zoo3:60010");
         hBaseConfig.set("hbase.zookeeper.quorum","zoo3");
         hBaseConfig.set("hbase.zookeeper.property.clientPort", "2181");
         HTable table = new HTable(hBaseConfig, "ocr_table");
