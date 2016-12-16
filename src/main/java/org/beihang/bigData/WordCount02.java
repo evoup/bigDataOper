@@ -1,4 +1,5 @@
 package org.beihang.bigData;
+import java.io.IOException;
 import java.util.Arrays;
 
 import org.apache.commons.logging.Log;
@@ -26,6 +27,12 @@ public class WordCount02 {
         CharImageProcess proc = new CharImageProcessImpl("43254545");
         proc.getTextFromSpiderImage("/project/Pacifico.ttf");
         LOG.info("[read hdfs font ok]");
+        HbaseProcess hproc = new HbaseProcess();
+        try {
+            hproc.saveImg("12");
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
 
         JavaReceiverInputDStream<String> lines=jssc.socketTextStream("datanode01", 9999);
 
