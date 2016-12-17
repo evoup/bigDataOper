@@ -59,7 +59,8 @@ public class CharImageProcessImpl implements CharImageProcess {
             String result = os.toString("UTF-8");
             System.out.println("[result:"+ result + "]");
         } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+            //System.out.println(ex.getMessage());
+            LOG.error(ex.getMessage(), ex);
         }
         return null;
     }
