@@ -31,24 +31,24 @@ public class HbaseProcess {
         table.put(p);*/
         HTable table = new HTable(hBaseConfig, "ocr_table");
         LOG.info("[saveImg][HTable new]");
-        Put p = new Put(Bytes.toBytes("myLittleRow"));
+        Put p = new Put(Bytes.toBytes("rowkey1"));
         LOG.info("[saveImg][Put p]");
-        p.add(Bytes.toBytes("myLittleFamily"), Bytes.toBytes("someQualifier"),
-                Bytes.toBytes("Some Value"));
+        p.add(Bytes.toBytes("info"), Bytes.toBytes("type"),
+                Bytes.toBytes("png"));
         LOG.info("[saveImg][Add p]");
         table.put(p);
         LOG.info("[saveImg][Put table]");
-        Get g = new Get(Bytes.toBytes("myLittleRow"));
+        Get g = new Get(Bytes.toBytes("rowkey1"));
         LOG.info("[saveImg][Get g]");
         Result r = table.get(g);
         LOG.info("[saveImg][Result r]");
-        byte[] value = r.getValue(Bytes.toBytes("myLittleFamily"), Bytes
-                .toBytes("someQualifier"));
+        byte[] value = r.getValue(Bytes.toBytes("info"), Bytes
+                .toBytes("type"));
         String valueStr = Bytes.toString(value);
         System.out.println("[GET: " + valueStr + "]");
         Scan s = new Scan();
-        s.addColumn(Bytes.toBytes("myLittleFamily"), Bytes
-                .toBytes("someQualifier"));
+        s.addColumn(Bytes.toBytes("info"), Bytes
+                .toBytes("type"));
         LOG.info("[saveImg][Scan s]");
         try (ResultScanner scanner = table.getScanner(s)) {
             for (Result rr = scanner.next(); rr != null; rr = scanner.next()) {
