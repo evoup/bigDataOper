@@ -26,11 +26,11 @@ public class Fonts {
             URI uri = new URI(fName);
             FileSystem hdfs = FileSystem.get(uri, configuration);
             Path path = new Path(uri);
-            InputStream inputStream = hdfs.open(path);
             FileStatus[] status = hdfs.listStatus(path);  // you need to pass in your hdfs path
             for (FileStatus st : status) {
                 System.out.println("[found a file:" + st.getPath().toString() + "]");
             }
+            InputStream inputStream = hdfs.open(path);
             font = Font.createFont(Font.TRUETYPE_FONT, inputStream);
             //hdfs.close();
         } catch (Exception ex) {
