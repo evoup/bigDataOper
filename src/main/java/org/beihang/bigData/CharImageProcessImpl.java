@@ -31,7 +31,7 @@ public class CharImageProcessImpl implements CharImageProcess {
         String s = "z";
         Fonts fonts = new Fonts();
         LOG.info("[new Fonts]");
-        Font font = fonts.getFont(receiptImageFilePath);
+        Font font = fonts.getFont(receiptImageFilePath).get(0); // TODO 目前只要每种字体的第一个版本
         Font sizedFont = font.deriveFont(200f);
         AffineTransform stretch = new AffineTransform();
         int w = 200; // image width

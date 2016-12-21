@@ -16,13 +16,16 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 public class Fonts {
 
-    public Font getFont(String fName) {
+    public List<Font> getFont(String fName) {
         Font font;
+        List<Font> fonts = new ArrayList<>();
         try {
             Configuration configuration = new Configuration();
             URI uri = new URI(fName);
@@ -37,17 +40,19 @@ public class Fonts {
                 ZipEntry entry;
                 while((entry = zipStream.getNextEntry())!=null) {
                     System.out.println("[zip file content:" + entry.getName() + "]");
+                    font = Font.createFont(Font.TRUETYPE_FONT, inputStream);
+                    fonts.add(font);
                 }
-                hdfs.close();
             }
-            InputStream inputStream = hdfs.open(path);
-            font = Font.createFont(Font.TRUETYPE_FONT, inputStream);
-            //hdfs.close();
+            //InputStream inputStream = hdfs.open(path);
+            //font = Font.createFont(Font.TRUETYPE_FONT, inputStream);
+            hdfs.close();
         } catch (Exception ex) {
             ex.printStackTrace();
             System.err.println(fName + " not loaded.  Using serif font.");
-            font = new Font("serif", Font.PLAIN, 24);
+            //font = new Font("serif", Font.PLAIN, 24);
+            //fonts.add(font);
         }
-        return font;
+        return fonts;
     }
 }
