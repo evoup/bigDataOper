@@ -16,6 +16,8 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URI;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 public class Fonts {
 
@@ -28,7 +30,15 @@ public class Fonts {
             Path path = new Path(uri);
             FileStatus[] status = hdfs.listStatus(path);  // you need to pass in your hdfs path
             for (FileStatus st : status) {
-                System.out.println("[found a download file:" + st.getPath().toString() + "]");
+                String fname = st.getPath().toString();
+                System.out.println("[found a download file:" + fname + "]");
+                InputStream inputStream = hdfs.open(st.getPath());
+                ZipInputStream zipStream = new ZipInputStream(inputStream);
+                ZipEntry entry;
+                while((entry = zipStream.getNextEntry())!=null) {
+                    System.out.println("[zip file content:" + entry.getName() + "]");
+                }
+                hdfs.close();
             }
             InputStream inputStream = hdfs.open(path);
             font = Font.createFont(Font.TRUETYPE_FONT, inputStream);
