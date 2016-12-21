@@ -7,10 +7,14 @@ package org.beihang.bigData;
 
 
 import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
+
 import java.awt.Font;
+import java.io.BufferedReader;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URI;
 
 public class Fonts {
@@ -23,6 +27,16 @@ public class Fonts {
             FileSystem hdfs = FileSystem.get(uri, configuration);
             Path path = new Path(uri);
             InputStream inputStream = hdfs.open(path);
+            FileStatus[] status = hdfs.listStatus(path);  // you need to pass in your hdfs path
+            for (int i = 0; i < status.length; i++) {
+                BufferedReader br = new BufferedReader(new InputStreamReader(hdfs.open(status[i].getPath())));
+                String line;
+                line = br.readLine();
+                while (line != null) {
+                    System.out.println("[found a file:" + line + "]");
+                    line = br.readLine();
+                }
+            }
             font = Font.createFont(Font.TRUETYPE_FONT, inputStream);
             //hdfs.close();
         } catch (Exception ex) {
