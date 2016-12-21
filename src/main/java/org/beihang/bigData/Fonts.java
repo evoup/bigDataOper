@@ -40,8 +40,7 @@ public class Fonts {
                 ZipEntry entry;
                 while((entry = zipStream.getNextEntry())!=null) {
                     System.out.println("[zip file content:" + entry.getName() + "]");
-                    InputStream inputStream1 = hdfs.open(new Path(entry.getName()));
-                    font = Font.createFont(Font.TRUETYPE_FONT, inputStream1);
+                    font = Font.createFont(Font.TRUETYPE_FONT, zipStream);
                     fonts.add(font);
                 }
             }
