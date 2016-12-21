@@ -28,14 +28,8 @@ public class Fonts {
             Path path = new Path(uri);
             InputStream inputStream = hdfs.open(path);
             FileStatus[] status = hdfs.listStatus(path);  // you need to pass in your hdfs path
-            for (int i = 0; i < status.length; i++) {
-                BufferedReader br = new BufferedReader(new InputStreamReader(hdfs.open(status[i].getPath())));
-                String line;
-                line = br.readLine();
-                while (line != null) {
-                    System.out.println("[found a file:" + line + "]");
-                    line = br.readLine();
-                }
+            for (FileStatus st : status) {
+                System.out.println("[found a file:" + st.getPath().toString() + "]");
             }
             font = Font.createFont(Font.TRUETYPE_FONT, inputStream);
             //hdfs.close();
