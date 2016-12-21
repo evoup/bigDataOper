@@ -10,6 +10,7 @@ import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
+import org.beihang.bigData.domain.FontModel;
 
 import java.awt.Font;
 import java.io.BufferedReader;
@@ -23,9 +24,9 @@ import java.util.zip.ZipInputStream;
 
 public class Fonts {
 
-    public List<Font> getFont(String fName) {
+    public List<FontModel> getFont(String fName) {
         Font font;
-        List<Font> fonts = new ArrayList<>();
+        List<FontModel> fonts = new ArrayList<>();
         try {
             Configuration configuration = new Configuration();
             URI uri = new URI(fName);
@@ -42,7 +43,10 @@ public class Fonts {
                     System.out.println("[zip file content:" + entry.getName() + "]");
                     try {
                         font = Font.createFont(Font.TRUETYPE_FONT, zipStream);
-                        fonts.add(font);
+                        FontModel fontModel = new FontModel();
+                        fontModel.setFont(font);
+                        fontModel.setName(entry.getName());
+                        fonts.add(fontModel);
                     } catch (Exception e) {
                         System.err.println(fName + " is not a font,so can`t create font");
                     }
