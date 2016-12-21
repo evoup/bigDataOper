@@ -25,8 +25,7 @@ public class WordCount02 {
         JavaStreamingContext jssc=new JavaStreamingContext(conf,Durations.seconds(10));
         LOG.info("[创建javaStreamingContext成功：" + jssc + "]");
         CharImageProcess proc = new CharImageProcessImpl("43254545");
-        //proc.getTextFromSpiderImage("/project/Pacifico.ttf");
-        proc.getTextFromSpiderImage("/project/");
+        proc.getTextFromSpiderImage("/project/full/"); // 参数是爬虫下载下来的文件的存放路径
         LOG.info("[read hdfs font ok]");
         HbaseProcess hproc = new HbaseProcess();
         try {
