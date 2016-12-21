@@ -9,4 +9,4 @@ java spark hbase opencv
 目录进行处理，调用javacv生成基于文字的图片，对图片适当变形，这样就有了新训练数据图片，最后将训练数据图片存到hbase。
 
 启动命令第一版：
-org.apache.spark.deploy.SparkSubmit --master yarn --deploy-mode client --executor-memory 1g /services/apps/sparkApps/bigDataOper-0.0.1-SNAPSHOT.jar --name wordCount --class=org.beihang.bigData.WordCount02
+sudo -u spark spark-submit --master yarn --deploy-mode client --executor-memory 1g /services/apps/sparkApps/bigDataOper-0.0.1-SNAPSHOT.jar --name wordCount --class=org.beihang.bigData.WordCount02
