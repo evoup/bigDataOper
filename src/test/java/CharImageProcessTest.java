@@ -27,7 +27,7 @@ public class CharImageProcessTest extends TestCase {
 
     public void testGetFont() {
         Fonts fonts = new Fonts();
-        Font font = fonts.getFont("/project/Pacifico.ttf");
+        Font font = fonts.getFont("/project/Pacifico.ttf").get(0);
         assertTrue(true);
     }
 
