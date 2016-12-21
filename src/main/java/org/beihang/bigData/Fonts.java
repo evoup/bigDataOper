@@ -51,7 +51,7 @@ public class Fonts {
             }
             //InputStream inputStream = hdfs.open(path);
             //font = Font.createFont(Font.TRUETYPE_FONT, inputStream);
-            hdfs.close();
+            //hdfs.close();
         } catch (Exception ex) {
             ex.printStackTrace();
             System.err.println(fName + " not loaded.  Using serif font.");
