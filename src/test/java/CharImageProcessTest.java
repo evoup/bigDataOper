@@ -18,7 +18,6 @@ import java.io.OutputStream;
  * 测试代码
  */
 public class CharImageProcessTest extends TestCase {
-
     public void testGenerateSampleImage() {
         CharImageProcess cp = new CharImageProcessImpl();
         cp.generateSampleImage();
