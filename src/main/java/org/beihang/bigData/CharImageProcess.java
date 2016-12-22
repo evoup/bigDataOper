@@ -1,12 +1,12 @@
 package org.beihang.bigData;
 
-import org.beihang.bigData.domain.PicModel;
+import org.beihang.bigData.domain.Pic;
 
 /**
  * Created by evoup on 16-12-11.
  */
 public interface CharImageProcess {
-    PicModel getTextFromSpiderImage(final String receiptImageFilePath, String character);
+    Pic getTextFromSpiderImage(final String receiptImageFilePath, String character);
 
     String generateSampleImage();
 }

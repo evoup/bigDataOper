@@ -4,7 +4,7 @@ package org.beihang.bigData;
 import net.iharder.base64.Base64;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.beihang.bigData.domain.PicModel;
+import org.beihang.bigData.domain.Pic;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -22,7 +22,7 @@ public class CharImageProcessImpl implements CharImageProcess {
     private static final Log LOG = LogFactory.getLog(CharImageProcessImpl.class);
 
     @Override
-    public PicModel getTextFromSpiderImage(String receiptImageFilePath, String s) {
+    public Pic getTextFromSpiderImage(String receiptImageFilePath, String s) {
         Fonts fonts = new Fonts();
         LOG.info("[new Fonts]");
         Font font = fonts.getFont(receiptImageFilePath).get(0).getFont(); // TODO 目前只要每种字体的第一个版本
@@ -55,7 +55,7 @@ public class CharImageProcessImpl implements CharImageProcess {
             ImageIO.write(bi, "png", b64);
             base64ImgContent = os.toString("UTF-8");
             System.out.println("[result:" + base64ImgContent + "]");
-            PicModel pic = new PicModel(fontName, base64ImgContent);
+            Pic pic = new Pic(fontName, base64ImgContent);
             return pic;
         } catch (IOException ex) {
             LOG.error(ex.getMessage(), ex);

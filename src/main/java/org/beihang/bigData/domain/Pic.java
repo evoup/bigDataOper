@@ -3,11 +3,11 @@ package org.beihang.bigData.domain;
 /**
  * Created by evoup on 2016/12/22.
  */
-public class PicModel {
+public class Pic {
     String fontName;
     String base64Content;
 
-    public PicModel(String fontName, String base64Content) {
+    public Pic(String fontName, String base64Content) {
         this.fontName = fontName;
         this.base64Content = base64Content;
     }

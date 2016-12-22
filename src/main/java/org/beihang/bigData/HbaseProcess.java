@@ -6,7 +6,7 @@ import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.client.*;
 import org.apache.hadoop.hbase.util.Bytes;
-import org.beihang.bigData.domain.PicModel;
+import org.beihang.bigData.domain.Pic;
 
 import java.io.IOException;
 
@@ -17,7 +17,7 @@ public class HbaseProcess {
 
     private static final Log LOG = LogFactory.getLog(HbaseProcess.class);
 
-    public void saveImg(PicModel pic, String charactor) throws IOException {
+    public void saveImg(Pic pic, String charactor) throws IOException {
         LOG.info("[saveImg][hbase conf]");
         Configuration hBaseConfig =  HBaseConfiguration.create();
         hBaseConfig.setInt("timeout", 120000);
