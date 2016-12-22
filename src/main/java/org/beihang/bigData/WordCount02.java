@@ -13,6 +13,7 @@ import org.apache.spark.streaming.api.java.JavaDStream;
 import org.apache.spark.streaming.api.java.JavaPairDStream;
 import org.apache.spark.streaming.api.java.JavaReceiverInputDStream;
 import org.apache.spark.streaming.api.java.JavaStreamingContext;
+import org.beihang.bigData.domain.PicModel;
 import scala.Tuple2;
 
 import java.io.IOException;
@@ -32,7 +33,7 @@ public class WordCount02 {
         CharImageProcess proc = new CharImageProcessImpl();
         for (String charactor : getCharacters()) {
             if (StringUtils.isNotEmpty(charactor)) {
-                String pic = proc.getTextFromSpiderImage("/project/full/", charactor); // 参数是爬虫下载下来的文件的存放路径
+                PicModel pic = proc.getTextFromSpiderImage("/project/full/", charactor); // 参数是爬虫下载下来的文件的存放路径
                 LOG.info("[read hdfs font ok]");
                 HbaseProcess hproc = new HbaseProcess();
                 try {
