@@ -30,7 +30,7 @@ public class HbaseProcess {
         LOG.info("[saveImg][Put p]");
         p.add(Bytes.toBytes("info"), Bytes.toBytes("type"), Bytes.toBytes("png"));
         p.add(Bytes.toBytes("info"), Bytes.toBytes("content"), Bytes.toBytes(picBase64));
-        p.add(Bytes.toBytes("info"), Bytes.toBytes("char"), Bytes.toBytes(charactor));
+        p.add(Bytes.toBytes("info"), Bytes.toBytes(charactor), Bytes.toBytes(charactor)); // info:0 info:a ...
         LOG.info("[saveImg][Add p]");
         table.put(p);
         LOG.info("[saveImg][Put table]");
