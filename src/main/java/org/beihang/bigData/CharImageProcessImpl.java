@@ -18,13 +18,7 @@ import java.io.OutputStream;
  */
 public class CharImageProcessImpl implements CharImageProcess {
 
-    String timeStampDefined = null;
-
     private static final Log LOG = LogFactory.getLog(CharImageProcessImpl.class);
-
-    public CharImageProcessImpl(String timeStampDefined) {
-        this.timeStampDefined = timeStampDefined;
-    }
 
     @Override
     public String getTextFromSpiderImage(String receiptImageFilePath) {
@@ -52,14 +46,12 @@ public class CharImageProcessImpl implements CharImageProcess {
         drawCenteredString(g,s,w,h,sizedFont);
         g.dispose();
         try {
-            //ImageIO.write(img, "png", new File("/sparkStream001/Text.png"));
             ByteArrayOutputStream os = new ByteArrayOutputStream();
             OutputStream b64 = new Base64.OutputStream(os);
             ImageIO.write(bi, "png", b64);
             String result = os.toString("UTF-8");
             System.out.println("[result:"+ result + "]");
         } catch (IOException ex) {
-            //System.out.println(ex.getMessage());
             LOG.error(ex.getMessage(), ex);
         }
         return null;

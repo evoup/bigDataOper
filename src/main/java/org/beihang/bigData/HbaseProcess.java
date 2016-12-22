@@ -24,11 +24,6 @@ public class HbaseProcess {
         hBaseConfig.set("hbase.zookeeper.quorum", "zoo3");
         hBaseConfig.set("hbase.zookeeper.property.clientPort", "2181");
         LOG.info("[saveImg][hbase ok]");
-/*        HTable table = new HTable(hBaseConfig, "ocr_table");
-        Put p = new Put(Bytes.toBytes(fontName));
-        p.add(Bytes.toBytes("info"), Bytes.toBytes("type"),
-                Bytes.toBytes("png"));
-        table.put(p);*/
         HTable table = new HTable(hBaseConfig, "ocr_table");
         LOG.info("[saveImg][HTable new]");
         Put p = new Put(Bytes.toBytes("rowkey1"));

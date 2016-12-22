@@ -1,6 +1,4 @@
 package org.beihang.bigData;
-import java.io.IOException;
-import java.util.Arrays;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -14,6 +12,9 @@ import org.apache.spark.streaming.api.java.JavaPairDStream;
 import org.apache.spark.streaming.api.java.JavaReceiverInputDStream;
 import org.apache.spark.streaming.api.java.JavaStreamingContext;
 import scala.Tuple2;
+
+import java.io.IOException;
+import java.util.Arrays;
 public class WordCount02 {
     private static final Log LOG = LogFactory.getLog(WordCount02.class);
 
@@ -24,7 +25,7 @@ public class WordCount02 {
                 .set("spark.testing.memory", "2147480000");
         JavaStreamingContext jssc=new JavaStreamingContext(conf,Durations.seconds(10));
         LOG.info("[创建javaStreamingContext成功：" + jssc + "]");
-        CharImageProcess proc = new CharImageProcessImpl("43254545");
+        CharImageProcess proc = new CharImageProcessImpl();
         proc.getTextFromSpiderImage("/project/full/"); // 参数是爬虫下载下来的文件的存放路径
         LOG.info("[read hdfs font ok]");
         HbaseProcess hproc = new HbaseProcess();

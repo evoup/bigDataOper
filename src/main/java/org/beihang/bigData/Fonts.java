@@ -12,10 +12,8 @@ import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.beihang.bigData.domain.FontModel;
 
-import java.awt.Font;
-import java.io.BufferedReader;
+import java.awt.*;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,14 +51,9 @@ public class Fonts {
 
                 }
             }
-            //InputStream inputStream = hdfs.open(path);
-            //font = Font.createFont(Font.TRUETYPE_FONT, inputStream);
-            //hdfs.close();
         } catch (Exception ex) {
             ex.printStackTrace();
             System.err.println(fName + " not loaded.  Using serif font.");
-            //font = new Font("serif", Font.PLAIN, 24);
-            //fonts.add(font);
         }
         return fonts;
     }
