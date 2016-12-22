@@ -8,6 +8,7 @@ import java.awt.*;
 public class FontModel {
     String name;
     Font font;
+    String hdfsPath;
 
     public String getName() {
         return name;
@@ -23,5 +24,13 @@ public class FontModel {
 
     public void setFont(Font font) {
         this.font = font;
+    }
+
+    public String getHdfsPath() {
+        return hdfsPath;
+    }
+
+    public void setHdfsPath(String hdfsPath) {
+        this.hdfsPath = hdfsPath;
     }
 }

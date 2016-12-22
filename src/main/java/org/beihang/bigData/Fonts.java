@@ -44,6 +44,7 @@ public class Fonts {
                         FontModel fontModel = new FontModel();
                         fontModel.setFont(font);
                         fontModel.setName(entry.getName());
+                        fontModel.setHdfsPath(fname);
                         fonts.add(fontModel);
                     } catch (Exception e) {
                         System.err.println(fName + " is not a font,so can`t create font");

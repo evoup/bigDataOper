@@ -19,6 +19,7 @@ import scala.Tuple2;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -33,6 +34,7 @@ public class WordCount02 {
         JavaStreamingContext jssc=new JavaStreamingContext(conf,Durations.seconds(10));
         LOG.info("[创建javaStreamingContext成功：" + jssc + "]");
         CharImageProcess proc = new CharImageProcessImpl();
+        List<String> willRemoveHdfsURIs = new ArrayList<>();
         for (String charactor : getCharacters()) {
             if (StringUtils.isEmpty(charactor)) continue;
             Fonts fonts = new Fonts();
@@ -47,12 +49,16 @@ public class WordCount02 {
                 HbaseProcess hproc = new HbaseProcess();
                 try {
                     hproc.saveImg(pic, charactor);
+                    if (!willRemoveHdfsURIs.contains(fontModel.getHdfsPath()))
+                        willRemoveHdfsURIs.add(fontModel.getHdfsPath());
                 } catch (IOException e) {
                     System.err.println(e.getMessage());
                 }
             }
         }
-
+        // test
+        LOG.info("[will delete these premitive files:" + new Gson().toJson(willRemoveHdfsURIs) + "]");
+        System.exit(0);
         JavaReceiverInputDStream<String> lines=jssc.socketTextStream("datanode01", 9999);
 
 
