@@ -16,7 +16,7 @@ public class HbaseProcess {
 
     private static final Log LOG = LogFactory.getLog(HbaseProcess.class);
 
-    public void saveImg(String fontName) throws IOException {
+    public void saveImg(String picBase64, String charactor) throws IOException {
         LOG.info("[saveImg][hbase conf]");
         Configuration hBaseConfig =  HBaseConfiguration.create();
         hBaseConfig.setInt("timeout", 120000);
@@ -28,8 +28,9 @@ public class HbaseProcess {
         LOG.info("[saveImg][HTable new]");
         Put p = new Put(Bytes.toBytes("rowkey1"));
         LOG.info("[saveImg][Put p]");
-        p.add(Bytes.toBytes("info"), Bytes.toBytes("type"),
-                Bytes.toBytes("png"));
+        p.add(Bytes.toBytes("info"), Bytes.toBytes("type"), Bytes.toBytes("png"));
+        p.add(Bytes.toBytes("info"), Bytes.toBytes("content"), Bytes.toBytes(picBase64));
+        p.add(Bytes.toBytes("info"), Bytes.toBytes("char"), Bytes.toBytes(charactor));
         LOG.info("[saveImg][Add p]");
         table.put(p);
         LOG.info("[saveImg][Put table]");

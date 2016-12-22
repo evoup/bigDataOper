@@ -1,6 +1,7 @@
 package org.beihang.bigData;
 
 import com.google.gson.Gson;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.spark.SparkConf;
@@ -23,22 +24,25 @@ public class WordCount02 {
 
     public static void main(String[] args) {
 
-        getCharacters();
-
 
         SparkConf conf = new SparkConf().setMaster("local[4]").setAppName("wordCountSparkStream")
                 .set("spark.testing.memory", "2147480000");
         JavaStreamingContext jssc=new JavaStreamingContext(conf,Durations.seconds(10));
         LOG.info("[创建javaStreamingContext成功：" + jssc + "]");
         CharImageProcess proc = new CharImageProcessImpl();
-        proc.getTextFromSpiderImage("/project/full/", "c"); // 参数是爬虫下载下来的文件的存放路径
-        LOG.info("[read hdfs font ok]");
-        HbaseProcess hproc = new HbaseProcess();
-        try {
-            hproc.saveImg("12");
-        } catch (IOException e) {
-            System.err.println(e.getMessage());
+        for (String charactor : getCharacters()) {
+            if (StringUtils.isNotEmpty(charactor)) {
+                String pic = proc.getTextFromSpiderImage("/project/full/", charactor); // 参数是爬虫下载下来的文件的存放路径
+                LOG.info("[read hdfs font ok]");
+                HbaseProcess hproc = new HbaseProcess();
+                try {
+                    hproc.saveImg(pic, charactor);
+                } catch (IOException e) {
+                    System.err.println(e.getMessage());
+                }
+            }
         }
+
 
         JavaReceiverInputDStream<String> lines=jssc.socketTextStream("datanode01", 9999);
 
