@@ -25,6 +25,9 @@ public class CharImageProcessImpl implements CharImageProcess {
         Fonts fonts = new Fonts();
         LOG.info("[new Fonts]");
         Font font = fonts.getFont(receiptImageFilePath).get(0).getFont(); // TODO 目前只要每种字体的第一个版本
+        String fontName = fonts.getFont(receiptImageFilePath).get(0).getName();
+        LOG.info("[fontName:" + fontName + "]");
+        System.exit(0);
         Font sizedFont = font.deriveFont(200f);
         AffineTransform stretch = new AffineTransform();
         int w = 200; // image width
