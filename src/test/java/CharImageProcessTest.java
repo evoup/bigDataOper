@@ -20,7 +20,7 @@ import java.io.OutputStream;
 public class CharImageProcessTest extends TestCase {
 
     public void testGenerateSampleImage() {
-        CharImageProcess cp = new CharImageProcessImpl("");
+        CharImageProcess cp = new CharImageProcessImpl();
         cp.generateSampleImage();
         assertTrue(true);
     }
