@@ -21,8 +21,7 @@ public class CharImageProcessImpl implements CharImageProcess {
     private static final Log LOG = LogFactory.getLog(CharImageProcessImpl.class);
 
     @Override
-    public String getTextFromSpiderImage(String receiptImageFilePath) {
-        String s = "z";
+    public String getTextFromSpiderImage(String receiptImageFilePath, String s) {
         Fonts fonts = new Fonts();
         LOG.info("[new Fonts]");
         Font font = fonts.getFont(receiptImageFilePath).get(0).getFont(); // TODO 目前只要每种字体的第一个版本
@@ -45,12 +44,14 @@ public class CharImageProcessImpl implements CharImageProcess {
         g.setColor(Color.BLACK);
         drawCenteredString(g,s,w,h,sizedFont);
         g.dispose();
+        String base64ImgContent;
         try {
             ByteArrayOutputStream os = new ByteArrayOutputStream();
             OutputStream b64 = new Base64.OutputStream(os);
             ImageIO.write(bi, "png", b64);
-            String result = os.toString("UTF-8");
-            System.out.println("[result:"+ result + "]");
+            base64ImgContent = os.toString("UTF-8");
+            System.out.println("[result:" + base64ImgContent + "]");
+            return base64ImgContent;
         } catch (IOException ex) {
             LOG.error(ex.getMessage(), ex);
         }

@@ -1,5 +1,6 @@
 package org.beihang.bigData;
 
+import com.google.gson.Gson;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.spark.SparkConf;
@@ -15,10 +16,14 @@ import scala.Tuple2;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
+
 public class WordCount02 {
     private static final Log LOG = LogFactory.getLog(WordCount02.class);
 
     public static void main(String[] args) {
+
+        getCharacters();
 
 
         SparkConf conf = new SparkConf().setMaster("local[4]").setAppName("wordCountSparkStream")
@@ -26,7 +31,7 @@ public class WordCount02 {
         JavaStreamingContext jssc=new JavaStreamingContext(conf,Durations.seconds(10));
         LOG.info("[创建javaStreamingContext成功：" + jssc + "]");
         CharImageProcess proc = new CharImageProcessImpl();
-        proc.getTextFromSpiderImage("/project/full/"); // 参数是爬虫下载下来的文件的存放路径
+        proc.getTextFromSpiderImage("/project/full/", "c"); // 参数是爬虫下载下来的文件的存放路径
         LOG.info("[read hdfs font ok]");
         HbaseProcess hproc = new HbaseProcess();
         try {
@@ -65,8 +70,13 @@ public class WordCount02 {
         jssc.awaitTermination();//等待计算结束
 
 
+    }
 
-
+    private static List<String> getCharacters() {
+        String str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
+        String[] arr = str.split("");
+        LOG.info("[---test---:" + new Gson().toJson(arr) + "]");
+        return Arrays.asList(arr);
     }
 
 }
