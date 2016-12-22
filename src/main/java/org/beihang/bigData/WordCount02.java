@@ -13,9 +13,11 @@ import org.apache.spark.streaming.api.java.JavaDStream;
 import org.apache.spark.streaming.api.java.JavaPairDStream;
 import org.apache.spark.streaming.api.java.JavaReceiverInputDStream;
 import org.apache.spark.streaming.api.java.JavaStreamingContext;
+import org.beihang.bigData.domain.FontModel;
 import org.beihang.bigData.domain.Pic;
 import scala.Tuple2;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
@@ -32,8 +34,15 @@ public class WordCount02 {
         LOG.info("[创建javaStreamingContext成功：" + jssc + "]");
         CharImageProcess proc = new CharImageProcessImpl();
         for (String charactor : getCharacters()) {
-            if (StringUtils.isNotEmpty(charactor)) {
-                Pic pic = proc.getTextFromSpiderImage("/project/full/", charactor); // 参数是爬虫下载下来的文件的存放路径
+            if (StringUtils.isEmpty(charactor)) continue;
+            Fonts fonts = new Fonts();
+            String receiptImageFilePath = "/project/full/";
+            List<FontModel> fontModels = fonts.getFont(receiptImageFilePath);
+            if (fontModels == null) continue;
+            for (FontModel fontModel : fontModels) {
+                Font font = fontModel.getFont();
+                String fontName = fontModel.getName();
+                Pic pic = proc.getTextFromSpiderImage(font, fontName, charactor); // 参数是爬虫下载下来的文件的存放路径
                 LOG.info("[read hdfs font ok]");
                 HbaseProcess hproc = new HbaseProcess();
                 try {
@@ -43,7 +52,6 @@ public class WordCount02 {
                 }
             }
         }
-
 
         JavaReceiverInputDStream<String> lines=jssc.socketTextStream("datanode01", 9999);
 

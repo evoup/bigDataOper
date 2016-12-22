@@ -22,11 +22,9 @@ public class CharImageProcessImpl implements CharImageProcess {
     private static final Log LOG = LogFactory.getLog(CharImageProcessImpl.class);
 
     @Override
-    public Pic getTextFromSpiderImage(String receiptImageFilePath, String s) {
+    public Pic getTextFromSpiderImage(Font font, String fontName, String s) {
         Fonts fonts = new Fonts();
         LOG.info("[new Fonts]");
-        Font font = fonts.getFont(receiptImageFilePath).get(0).getFont(); // TODO 目前只要每种字体的第一个版本
-        String fontName = fonts.getFont(receiptImageFilePath).get(0).getName();
         LOG.info("[fontName:" + fontName + "]");
         Font sizedFont = font.deriveFont(200f);
         AffineTransform stretch = new AffineTransform();
