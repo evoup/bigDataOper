@@ -29,8 +29,7 @@ public class HbaseProcess {
         Put p = new Put(Bytes.toBytes("rowkey1"));
         LOG.info("[saveImg][Put p]");
         p.add(Bytes.toBytes("info"), Bytes.toBytes("type"), Bytes.toBytes("png"));
-        p.add(Bytes.toBytes("info"), Bytes.toBytes("content"), Bytes.toBytes(picBase64));
-        p.add(Bytes.toBytes("info"), Bytes.toBytes(charactor), Bytes.toBytes(charactor)); // info:0 info:a ...
+        p.add(Bytes.toBytes("info"), Bytes.toBytes("content_" + charactor), Bytes.toBytes(picBase64)); // info:content_0 info:content_a ...
         LOG.info("[saveImg][Add p]");
         table.put(p);
         LOG.info("[saveImg][Put table]");
