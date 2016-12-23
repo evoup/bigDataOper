@@ -4,6 +4,9 @@ import com.google.gson.Gson;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FileSystem;
+import org.apache.hadoop.fs.Path;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.function.FlatMapFunction;
 import org.apache.spark.api.java.function.Function2;
@@ -15,10 +18,13 @@ import org.apache.spark.streaming.api.java.JavaReceiverInputDStream;
 import org.apache.spark.streaming.api.java.JavaStreamingContext;
 import org.beihang.bigData.domain.FontModel;
 import org.beihang.bigData.domain.Pic;
+import org.slf4j.Logger;
 import scala.Tuple2;
 
 import java.awt.*;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -58,7 +64,13 @@ public class WordCount02 {
         }
         // test
         LOG.info("[will delete these premitive files:" + new Gson().toJson(willRemoveHdfsURIs) + "]");
-        System.exit(0);
+        for (String hdfsOldFileURI : willRemoveHdfsURIs) {
+            try {
+                deleteOldFile(hdfsOldFileURI);
+            } catch (URISyntaxException|IOException e) {
+                LOG.error(e.getMessage(), e);
+            }
+        }
         JavaReceiverInputDStream<String> lines=jssc.socketTextStream("datanode01", 9999);
 
 
@@ -96,6 +108,14 @@ public class WordCount02 {
         String[] arr = str.split("");
         LOG.info("[---test---:" + new Gson().toJson(arr) + "]");
         return Arrays.asList(arr);
+    }
+
+    private static  void deleteOldFile(String fName) throws URISyntaxException, IOException {
+        Configuration configuration = new Configuration();
+        URI uri = new URI(fName);
+        Path path = new Path(uri);
+        FileSystem hdfs = FileSystem.get(uri, configuration);
+        hdfs.delete(path, true);
     }
 
 }
