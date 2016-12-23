@@ -44,7 +44,7 @@ public class WordCount02 {
         for (String charactor : getCharacters()) {
             if (StringUtils.isEmpty(charactor)) continue;
             Fonts fonts = new Fonts();
-            String receiptImageFilePath = "/project/full/";
+            String receiptImageFilePath = "/tmp/full/";
             List<FontModel> fontModels = fonts.getFont(receiptImageFilePath);
             if (fontModels == null) continue;
             for (FontModel fontModel : fontModels) {
@@ -115,6 +115,8 @@ public class WordCount02 {
         URI uri = new URI(fName);
         Path path = new Path(uri);
         FileSystem  hdfs = FileSystem.get(URI.create("hdfs://namenode:8020"), configuration);
+        System.out.println("[path:" + fName + "]");
+        System.exit(0);
         hdfs.delete(path, true);
     }
 
