@@ -114,7 +114,7 @@ public class WordCount02 {
         Configuration configuration = new Configuration();
         URI uri = new URI(fName);
         Path path = new Path(uri);
-        FileSystem hdfs = FileSystem.get(uri, configuration);
+        FileSystem  hdfs = FileSystem.get(URI.create("hdfs://namenode:8020"), configuration);
         hdfs.delete(path, true);
     }
 
