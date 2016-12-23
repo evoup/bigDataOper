@@ -23,9 +23,7 @@ public class CharImageProcessImpl implements CharImageProcess {
 
     @Override
     public Pic getTextFromSpiderImage(Font font, String fontName, String s) {
-        Fonts fonts = new Fonts();
-        LOG.info("[new Fonts]");
-        LOG.info("[fontName:" + fontName + "]");
+        LOG.info("[new Fonts][fontName:" + fontName + "]");
         Font sizedFont = font.deriveFont(200f);
         AffineTransform stretch = new AffineTransform();
         int w = 200; // image width
