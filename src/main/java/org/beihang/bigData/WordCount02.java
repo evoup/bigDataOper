@@ -44,7 +44,7 @@ public class WordCount02 {
         for (String charactor : getCharacters()) {
             if (StringUtils.isEmpty(charactor)) continue;
             Fonts fonts = new Fonts();
-            String receiptImageFilePath = "/tmp/full/";
+            String receiptImageFilePath = "/tmp/downloadFiles/";
             List<FontModel> fontModels = fonts.getFont(receiptImageFilePath);
             if (fontModels == null) continue;
             for (FontModel fontModel : fontModels) {
