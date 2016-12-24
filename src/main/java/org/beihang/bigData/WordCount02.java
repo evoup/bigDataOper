@@ -82,11 +82,12 @@ public class WordCount02 {
 
         JavaPairDStream<String, Integer> pairs=words.mapToPair(new PairFunction<String,String,Integer>(){
             public Tuple2<String, Integer> call(String arg0) throws Exception {
+                System.out.println("[>>>>>>>>>>>>>>>>in map:" + arg0 + "]");
                 return new Tuple2<String,Integer>(arg0,1);
             }});
 
 
-/*        JavaPairDStream<String,Integer> wordCounts=pairs.reduceByKey(new Function2<Integer,Integer,Integer>(){
+        JavaPairDStream<String,Integer> wordCounts=pairs.reduceByKey(new Function2<Integer,Integer,Integer>(){
             public Integer call(Integer arg0, Integer arg1) throws Exception {
                 return arg0+arg1;
             }});
@@ -95,7 +96,7 @@ public class WordCount02 {
         wordCounts.print();
 
 
-        wordCounts.dstream().saveAsTextFiles("hdfs://namenode:8020/sparkStream001/wordCount/", "spark");*/
+        wordCounts.dstream().saveAsTextFiles("hdfs://namenode:8020/sparkStream001/wordCount/", "spark");
 
         jssc.start();//开始计算
         jssc.awaitTermination();//等待计算结束
