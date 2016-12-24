@@ -91,7 +91,7 @@ public class WordCount02 {
                         return new Tuple2<String, Integer>("NOT_DOWN_FILE", 1);
                     }
                     Fonts fonts = new Fonts();
-                    String receiptImageFilePath = "/tmp/downloadFiles/";
+                    String receiptImageFilePath = "/tmp/downloadFiles/" + arg0;
                     List<FontModel> fontModels = fonts.getFont(receiptImageFilePath);
                 }
                 ///////////////////////
