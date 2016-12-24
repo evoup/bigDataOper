@@ -86,7 +86,7 @@ public class WordCount02 {
             }});
 
 
-        JavaPairDStream<String,Integer> wordCounts=pairs.reduceByKey(new Function2<Integer,Integer,Integer>(){
+/*        JavaPairDStream<String,Integer> wordCounts=pairs.reduceByKey(new Function2<Integer,Integer,Integer>(){
             public Integer call(Integer arg0, Integer arg1) throws Exception {
                 return arg0+arg1;
             }});
@@ -95,7 +95,7 @@ public class WordCount02 {
         wordCounts.print();
 
 
-        wordCounts.dstream().saveAsTextFiles("hdfs://namenode:8020/sparkStream001/wordCount/", "spark");
+        wordCounts.dstream().saveAsTextFiles("hdfs://namenode:8020/sparkStream001/wordCount/", "spark");*/
 
         jssc.start();//开始计算
         jssc.awaitTermination();//等待计算结束
