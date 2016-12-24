@@ -18,7 +18,6 @@ import org.apache.spark.streaming.api.java.JavaReceiverInputDStream;
 import org.apache.spark.streaming.api.java.JavaStreamingContext;
 import org.beihang.bigData.domain.FontModel;
 import org.beihang.bigData.domain.Pic;
-import org.slf4j.Logger;
 import scala.Tuple2;
 
 import java.awt.*;
@@ -29,13 +28,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class WordCount02 {
-    private static final Log LOG = LogFactory.getLog(WordCount02.class);
+public class SamplesCreator {
+    private static final Log LOG = LogFactory.getLog(SamplesCreator.class);
 
     public static void main(String[] args) {
 
 
-        final SparkConf conf = new SparkConf().setMaster("local[4]").setAppName("wordCountSparkStream")
+        final SparkConf conf = new SparkConf().setMaster("local[4]").setAppName("samplesCreatorSparkStream")
                 .set("spark.testing.memory", "2147480000");
         JavaStreamingContext jssc=new JavaStreamingContext(conf,Durations.seconds(10));
         LOG.info("[创建javaStreamingContext成功：" + jssc + "]");
@@ -104,7 +103,7 @@ public class WordCount02 {
         wordCounts.print();
 
 
-        wordCounts.dstream().saveAsTextFiles("hdfs://namenode:8020/sparkStream001/wordCount/", "spark");
+        wordCounts.dstream().saveAsTextFiles("hdfs://namenode:8020/sparkStream001/samplesCreator/", "spark");
 
         jssc.start();//开始计算
         jssc.awaitTermination();//等待计算结束
@@ -115,7 +114,7 @@ public class WordCount02 {
     private static List<String> getCharacters() {
         String str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
         String[] arr = str.split("");
-        LOG.info("[---test---:" + new Gson().toJson(arr) + "]");
+        LOG.info("[read sample characters:" + new Gson().toJson(arr) + "]");
         return Arrays.asList(arr);
     }
 
@@ -124,7 +123,7 @@ public class WordCount02 {
         URI uri = new URI(fName);
         Path path = new Path(uri);
         FileSystem hdfs = FileSystem.get(URI.create("hdfs://namenode:8020"), configuration);
-        LOG.info("[delte work download file:" + fName + "]");
+        LOG.info("[delete work download file:" + fName + "]");
         hdfs.delete(path, true);
     }
 
