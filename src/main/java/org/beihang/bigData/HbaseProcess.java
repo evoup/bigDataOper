@@ -57,6 +57,7 @@ public class HbaseProcess {
             LOG.error("[saveImg][error:" + e.getMessage() + "]");
             throw e;
         }
+        System.exit(0);
     }
 
 

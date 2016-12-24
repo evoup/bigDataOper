@@ -94,7 +94,23 @@ public class WordCount02 {
                     String receiptImageFilePath = "/tmp/downloadFiles/" + arg0;
                     System.out.println("[receiptImageFilePath:" +  receiptImageFilePath + "]");
                     List<FontModel> fontModels = fonts.getFont(receiptImageFilePath);
+                    for (FontModel fontModel : fontModels) {
+                        Font font = fontModel.getFont();
+                        String fontName = fontModel.getName();
+                        Pic pic = proc.getTextFromSpiderImage(font, fontName, charactor); // 参数是爬虫下载下来的文件的存放路径
+                        LOG.info("[read hdfs font ok]");
+                        HbaseProcess hproc = new HbaseProcess();
+                        try {
+                            hproc.saveImg(pic, charactor);
+                            if (!willRemoveHdfsURIs.contains(fontModel.getHdfsPath()))
+                                willRemoveHdfsURIs.add(fontModel.getHdfsPath());
+                        } catch (IOException e) {
+                            System.err.println(e.getMessage());
+                        }
+                    }
                 }
+                // test
+                LOG.info("[will delete these premitive files:" + new Gson().toJson(willRemoveHdfsURIs) + "]");
                 ///////////////////////
                 return new Tuple2<String,Integer>(arg0,1);
             }});

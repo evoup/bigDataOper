@@ -57,7 +57,6 @@ public class Fonts {
             ex.printStackTrace();
             System.err.println(fName + " not loaded.  Using serif font.");
         }
-        System.exit(0);
         return fonts;
     }
 }
