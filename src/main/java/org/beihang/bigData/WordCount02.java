@@ -82,7 +82,19 @@ public class WordCount02 {
 
         JavaPairDStream<String, Integer> pairs=words.mapToPair(new PairFunction<String,String,Integer>(){
             public Tuple2<String, Integer> call(String arg0) throws Exception {
-                System.out.println("[>>>>>>>>>>>>>>>>in map:" + arg0 + "]");
+                // arg0是下载的文件名（注：没有路径名的）
+                ///////////////////////
+                CharImageProcess proc = new CharImageProcessImpl();
+                List<String> willRemoveHdfsURIs = new ArrayList<>();
+                for (String charactor : getCharacters()) {
+                    if (StringUtils.isEmpty(charactor)) {
+                        return new Tuple2<String, Integer>("NOT_DOWN_FILE", 1);
+                    }
+                    Fonts fonts = new Fonts();
+                    String receiptImageFilePath = "/tmp/downloadFiles/";
+                    List<FontModel> fontModels = fonts.getFont(receiptImageFilePath);
+                }
+                ///////////////////////
                 return new Tuple2<String,Integer>(arg0,1);
             }});
 
@@ -115,7 +127,7 @@ public class WordCount02 {
         Configuration configuration = new Configuration();
         URI uri = new URI(fName);
         Path path = new Path(uri);
-        FileSystem  hdfs = FileSystem.get(URI.create("hdfs://namenode:8020"), configuration);
+        FileSystem hdfs = FileSystem.get(URI.create("hdfs://namenode:8020"), configuration);
         LOG.info("[delte work download file:" + fName + "]");
         hdfs.delete(path, true);
     }

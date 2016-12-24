@@ -30,11 +30,12 @@ public class Fonts {
             URI uri = new URI(fName);
             FileSystem hdfs = FileSystem.get(uri, configuration);
             Path path = new Path(uri);
-            FileStatus[] status = hdfs.listStatus(path);  // you need to pass in your hdfs path
-            for (FileStatus st : status) {
-                String fname = st.getPath().toString();
-                System.out.println("[found a download file:" + fname + "]");
-                InputStream inputStream = hdfs.open(st.getPath());
+           // FileStatus[] status = hdfs.listStatus(path);  // you need to pass in your hdfs path
+            //for (FileStatus st : status) {
+                //String fname = st.getPath().toString();
+                //System.out.println("[found a download file:" + fname + "]");
+                //InputStream inputStream = hdfs.open(st.getPath());
+                InputStream inputStream = hdfs.open(path);
                 ZipInputStream zipStream = new ZipInputStream(inputStream);
                 ZipEntry entry;
                 while((entry = zipStream.getNextEntry())!=null) {
@@ -44,18 +45,19 @@ public class Fonts {
                         FontModel fontModel = new FontModel();
                         fontModel.setFont(font);
                         fontModel.setName(entry.getName());
-                        fontModel.setHdfsPath(fname);
+                        fontModel.setHdfsPath(fName);
                         fonts.add(fontModel);
                     } catch (Exception e) {
                         System.err.println(fName + " is not a font,so can`t create font");
                     }
 
                 }
-            }
+            //}
         } catch (Exception ex) {
             ex.printStackTrace();
             System.err.println(fName + " not loaded.  Using serif font.");
         }
+        System.exit(0);
         return fonts;
     }
 }
