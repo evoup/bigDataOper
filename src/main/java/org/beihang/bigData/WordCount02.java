@@ -39,7 +39,7 @@ public class WordCount02 {
                 .set("spark.testing.memory", "2147480000");
         JavaStreamingContext jssc=new JavaStreamingContext(conf,Durations.seconds(10));
         LOG.info("[创建javaStreamingContext成功：" + jssc + "]");
-        CharImageProcess proc = new CharImageProcessImpl();
+        /*CharImageProcess proc = new CharImageProcessImpl();
         List<String> willRemoveHdfsURIs = new ArrayList<>();
         for (String charactor : getCharacters()) {
             if (StringUtils.isEmpty(charactor)) continue;
@@ -70,7 +70,7 @@ public class WordCount02 {
             } catch (URISyntaxException|IOException e) {
                 LOG.error(e.getMessage(), e);
             }
-        }
+        }*/
         JavaReceiverInputDStream<String> lines=jssc.socketTextStream("datanode01", 9999);
 
 
