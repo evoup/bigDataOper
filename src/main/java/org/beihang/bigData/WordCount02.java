@@ -54,17 +54,19 @@ public class WordCount02 {
                 ///////////////////////
                 CharImageProcess proc = new CharImageProcessImpl();
                 List<String> willRemoveHdfsURIs = new ArrayList<>();
+                List<String> proceedFontNames = new ArrayList<>();
                 for (String charactor : getCharacters()) {
                     if (StringUtils.isEmpty(charactor)) {
                         continue; // 第一个会出现一个空格要去掉
                     }
                     Fonts fonts = new Fonts();
                     String receiptImageFilePath = "/tmp/downloadFiles/" + arg0;
-                    System.out.println("[receiptImageFilePath:" +  receiptImageFilePath + "]");
+                    LOG.info("[receiptImageFilePath:" + receiptImageFilePath + "]");
                     List<FontModel> fontModels = fonts.getFont(receiptImageFilePath);
                     for (FontModel fontModel : fontModels) {
                         Font font = fontModel.getFont();
                         String fontName = fontModel.getName();
+                        if (!proceedFontNames.contains(fontName)) proceedFontNames.add(fontName);
                         Pic pic = proc.getTextFromSpiderImage(font, fontName, charactor); // 参数是爬虫下载下来的文件的存放路径
                         LOG.info("[read hdfs font ok]");
                         HbaseProcess hproc = new HbaseProcess();
@@ -73,22 +75,23 @@ public class WordCount02 {
                             if (!willRemoveHdfsURIs.contains(fontModel.getHdfsPath()))
                                 willRemoveHdfsURIs.add(fontModel.getHdfsPath());
                         } catch (IOException e) {
-                            System.err.println(e.getMessage());
+                            LOG.error(e.getMessage(), e);
                         }
                     }
                 }
-                // test
+                // delete download file from hdfs
                 LOG.info("[will delete these premitive files:" + new Gson().toJson(willRemoveHdfsURIs) + "]");
-                System.exit(0);
-/*                for (String hdfsOldFileURI : willRemoveHdfsURIs) {
+                for (String hdfsOldFileURI : willRemoveHdfsURIs) {
                     try {
                         deleteOldFile(hdfsOldFileURI);
                     } catch (URISyntaxException|IOException e) {
                         LOG.error(e.getMessage(), e);
                     }
-                }*/
+                }
                 ///////////////////////
-                return new Tuple2<String,Integer>(arg0,1);
+                String retKey = StringUtils.join(proceedFontNames, "|");
+                //return new Tuple2<String,Integer>(arg0,1);
+                return new Tuple2<String,Integer>(retKey, 1);
             }});
 
 
