@@ -35,7 +35,7 @@ public class WordCount02 {
     public static void main(String[] args) {
 
 
-        SparkConf conf = new SparkConf().setMaster("local[4]").setAppName("wordCountSparkStream")
+        final SparkConf conf = new SparkConf().setMaster("local[4]").setAppName("wordCountSparkStream")
                 .set("spark.testing.memory", "2147480000");
         JavaStreamingContext jssc=new JavaStreamingContext(conf,Durations.seconds(10));
         LOG.info("[创建javaStreamingContext成功：" + jssc + "]");
@@ -88,7 +88,7 @@ public class WordCount02 {
                 List<String> willRemoveHdfsURIs = new ArrayList<>();
                 for (String charactor : getCharacters()) {
                     if (StringUtils.isEmpty(charactor)) {
-                        return new Tuple2<String, Integer>("NOT_DOWN_FILE", 1);
+                        continue; // 第一个会出现一个空格要去掉
                     }
                     Fonts fonts = new Fonts();
                     String receiptImageFilePath = "/tmp/downloadFiles/" + arg0;
