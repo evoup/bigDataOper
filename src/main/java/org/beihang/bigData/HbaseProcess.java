@@ -44,7 +44,7 @@ public class HbaseProcess {
                 .toBytes("type"));
         String valueStr = Bytes.toString(value);
         System.out.println("[GET: " + valueStr + "]");
-        Scan s = new Scan();
+/*        Scan s = new Scan();
         s.addColumn(Bytes.toBytes("info"), Bytes
                 .toBytes("type"));
         LOG.info("[saveImg][Scan s]");
@@ -56,8 +56,7 @@ public class HbaseProcess {
         } catch (Exception e) {
             LOG.error("[saveImg][error:" + e.getMessage() + "]");
             throw e;
-        }
-        System.exit(0);
+        }*/
     }
 
 

@@ -39,38 +39,6 @@ public class WordCount02 {
                 .set("spark.testing.memory", "2147480000");
         JavaStreamingContext jssc=new JavaStreamingContext(conf,Durations.seconds(10));
         LOG.info("[创建javaStreamingContext成功：" + jssc + "]");
-        /*CharImageProcess proc = new CharImageProcessImpl();
-        List<String> willRemoveHdfsURIs = new ArrayList<>();
-        for (String charactor : getCharacters()) {
-            if (StringUtils.isEmpty(charactor)) continue;
-            Fonts fonts = new Fonts();
-            String receiptImageFilePath = "/tmp/downloadFiles/";
-            List<FontModel> fontModels = fonts.getFont(receiptImageFilePath);
-            if (fontModels == null) continue;
-            for (FontModel fontModel : fontModels) {
-                Font font = fontModel.getFont();
-                String fontName = fontModel.getName();
-                Pic pic = proc.getTextFromSpiderImage(font, fontName, charactor); // 参数是爬虫下载下来的文件的存放路径
-                LOG.info("[read hdfs font ok]");
-                HbaseProcess hproc = new HbaseProcess();
-                try {
-                    hproc.saveImg(pic, charactor);
-                    if (!willRemoveHdfsURIs.contains(fontModel.getHdfsPath()))
-                        willRemoveHdfsURIs.add(fontModel.getHdfsPath());
-                } catch (IOException e) {
-                    System.err.println(e.getMessage());
-                }
-            }
-        }
-        // test
-        LOG.info("[will delete these premitive files:" + new Gson().toJson(willRemoveHdfsURIs) + "]");
-        for (String hdfsOldFileURI : willRemoveHdfsURIs) {
-            try {
-                deleteOldFile(hdfsOldFileURI);
-            } catch (URISyntaxException|IOException e) {
-                LOG.error(e.getMessage(), e);
-            }
-        }*/
         JavaReceiverInputDStream<String> lines=jssc.socketTextStream("datanode01", 9999);
 
 
@@ -111,6 +79,14 @@ public class WordCount02 {
                 }
                 // test
                 LOG.info("[will delete these premitive files:" + new Gson().toJson(willRemoveHdfsURIs) + "]");
+                System.exit(0);
+/*                for (String hdfsOldFileURI : willRemoveHdfsURIs) {
+                    try {
+                        deleteOldFile(hdfsOldFileURI);
+                    } catch (URISyntaxException|IOException e) {
+                        LOG.error(e.getMessage(), e);
+                    }
+                }*/
                 ///////////////////////
                 return new Tuple2<String,Integer>(arg0,1);
             }});
