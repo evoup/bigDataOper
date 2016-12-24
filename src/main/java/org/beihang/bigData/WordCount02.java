@@ -92,6 +92,7 @@ public class WordCount02 {
                     }
                     Fonts fonts = new Fonts();
                     String receiptImageFilePath = "/tmp/downloadFiles/" + arg0;
+                    System.out.println("[receiptImageFilePath:" +  receiptImageFilePath + "]");
                     List<FontModel> fontModels = fonts.getFont(receiptImageFilePath);
                 }
                 ///////////////////////
